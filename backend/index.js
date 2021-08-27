@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/users");
 const pinRoute = require("./routes/pins");
+const paymentRoute = require("./routes/payment");
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ mongoose
 
 app.use("/api/users", userRoute);
 app.use("/api/pins", pinRoute);
+app.use("/api/payment", paymentRoute);
 
 app.listen(8800, () => {
   console.log("Backend server is running!");
