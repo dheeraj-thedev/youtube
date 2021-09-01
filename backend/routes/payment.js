@@ -7,9 +7,13 @@ const PaymentDetails = require('../models/PaymentDetails');
 const router = express.Router();
 //orders
 
+const cors = require("cors")
+const corsOption={
+    origin:"http://localhost:3000",
+    optionsSuccessStatus:200
+}
 
-
-router.post("/orders", async(req,resp)=>{
+router.post("/orders", cors(corsOption), async(req,resp)=>{
     try {
 
         //         RAZORPAY_SECRET=P1l9xwWRZlvBIo731x6BlLco
@@ -21,7 +25,7 @@ router.post("/orders", async(req,resp)=>{
         });
         /// later will put values from request after testing it 
         var options = {
-            amount: 50000,  // amount in the smallest currency unit
+            amount: 50000,  // amount in the smallest currency unit  {paisa}
             currency: "INR",
             receipt: "order_rcptid_11"
           };
@@ -41,7 +45,10 @@ router.post("/orders", async(req,resp)=>{
     }
 });
 
-router.post('/success', async (req,resp)=>{
+// bodyParser ?
+
+
+router.post('/success',cors(corsOption), async (req,resp)=>{
     try {
         const {
             orderCreationId,
