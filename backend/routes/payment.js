@@ -56,10 +56,33 @@ router.post('/success', async (req,resp)=>{
         const digest = shasum.digest("hex");
 
         if(digest!==razorpaySignature)
+        {
+            const newPayment = PaymentDetails({
+                //  orderId:orderCreationId+"-"+razorpayOrderId,
+                // paymentId:razorpayPaymentId,
+                // signature:razorpaySignature,
+                reazorpayDetails:{
+                    orderId:orderCreationId+"-"+razorpayOrderId,
+                    paymentId:razorpayPaymentId,
+                    signature:razorpaySignature
+                },
+                success:false,
+            });
+
+            await newPayment.save();
             return resp.status(400).json({mesg:'Transaction is not valid or secured '});
+        }
 
             const newPayment = PaymentDetails({
-
+                //  orderId:orderCreationId+"-"+razorpayOrderId,
+                // paymentId:razorpayPaymentId,
+                // signature:razorpaySignature,
+                reazorpayDetails:{
+                    orderId:orderCreationId+"-"+razorpayOrderId,
+                    paymentId:razorpayPaymentId,
+                    signature:razorpaySignature
+                },
+                success:true,
             });
 
             await newPayment.save();
