@@ -7,13 +7,9 @@ const PaymentDetails = require('../models/PaymentDetails');
 const router = express.Router();
 //orders
 
-const cors = require("cors")
-const corsOption={
-    origin:"http://localhost:3000",
-    optionsSuccessStatus:200
-}
 
-router.post("/orders", cors(corsOption), async(req,resp)=>{
+
+router.post("/orders", async(req,resp)=>{
     try {
 
         //         RAZORPAY_SECRET=P1l9xwWRZlvBIo731x6BlLco
@@ -32,12 +28,8 @@ router.post("/orders", cors(corsOption), async(req,resp)=>{
 
         const order= await instance.orders.create(options, function(err, order) {
             console.log(order);
-
             if(! order) return resp.status(500).send("Some error occured try again");
-
             resp.json(order)
-  
-  
           });
 
              } catch (error) {
@@ -48,7 +40,7 @@ router.post("/orders", cors(corsOption), async(req,resp)=>{
 // bodyParser ?
 
 
-router.post('/success',cors(corsOption), async (req,resp)=>{
+router.post('/success', async (req,resp)=>{
     try {
         const {
             orderCreationId,
@@ -59,7 +51,7 @@ router.post('/success',cors(corsOption), async (req,resp)=>{
 
         // shaSum  == cryptographic puzzle that needd to be created in order to maintian security
 
-        const shasum = crypto.createHmac("sha256","UnVZDdX6l2MooEX1Pd3k4hT2");
+        const shasum = crypto.createHmac("sha256","Bo24iY7SIYxAT0B8UefHMnEx");
         shasum.update(`${orderCreationId}|${razorpayPaymentId}`)
         const digest = shasum.digest("hex");
 

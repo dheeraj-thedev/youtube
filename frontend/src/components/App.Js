@@ -40,7 +40,7 @@ function App(){
 
         const {amount,id:order_id,currency}=result.data;
         const options={
-            key:"rzp_test_OAA8SFZ6nZKLkn",
+            key:"rzp_test_bc3YYLvn8W8GhG",
             amount : amount.toString(),
             currency:currency,
             name:"studnets corp",
